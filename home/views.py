@@ -33,6 +33,12 @@ def textKontrol(input):
     else:
         return False
 
+def durumValidation(input):
+    if any(input is x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
+        return True
+    else:
+        return False
+
 # Create your views here.
 def index(request):
     return render(request, 'deprem.html')
@@ -49,10 +55,9 @@ def report(request):
                 tel = tel
             else:
                 tel = "Yok"
-        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and textKontrol(durum):
+        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and durumValidation(durum):
             p = Person(isim=isim, sehir=sehir, adres=adres, tel=tel, durum=durum)
             p.save()
-            messages.success(request, 'Kaydedildi.')
             return HttpResponse("Kaydedildi.")
         else:
             return HttpResponseBadRequest("Giriş yapılan bilgilerde desteklenmeyen karakterler var.")
