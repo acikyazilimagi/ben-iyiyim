@@ -1,120 +1,68 @@
 {
-  "ipcMode": null,
-  "executionRoleArn": "arn:aws:iam::366354050833:role/ecsServiceRole",
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
-      "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/beniyiyim",
-          "awslogs-region": "eu-central-1",
-          "awslogs-create-group": "true",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-      "entryPoint": null,
+      "name": "container-name",
+      "image": "366354050833.dkr.ecr.eu-central-1.amazonaws.com/beniyiyim-ecr:245000c26d024b62e5cb52f32737f286c3b4d495",
+      "cpu": 2048,
+      "memory": 4096,
       "portMappings": [
         {
+          "name": "container-name-8000-tcp",
+          "containerPort": 8000,
           "hostPort": 8000,
-          "protocol": "tcp",
-          "containerPort": 8000
+          "protocol": "tcp"
         }
       ],
-      "command": null,
-      "linuxParameters": null,
-      "cpu": 2048,
-      "environment": [],
-      "resourceRequirements": null,
-      "ulimits": null,
-      "dnsServers": null,
-      "mountPoints": [],
-      "workingDirectory": null,
-      "secrets": null,
-      "dockerSecurityOptions": null,
-      "memory": 4096,
-      "memoryReservation": null,
-      "volumesFrom": [],
-      "stopTimeout": null,
-      "image": "beniyiyim",
-      "startTimeout": null,
-      "firelensConfiguration": null,
-      "dependsOn": null,
-      "disableNetworking": null,
-      "interactive": null,
-      "healthCheck": null,
       "essential": true,
-      "links": null,
-      "hostname": null,
-      "extraHosts": null,
-      "pseudoTerminal": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "systemControls": null,
-      "privileged": null,
-      "name": "container-name"
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "secrets": [
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:SECRET_KEY::"
+        },
+        {
+          "name": "PGHOST",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGHOST::"
+        },
+        {
+          "name": "PGPORT",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGPORT::"
+        },
+        {
+          "name": "PGUSER",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGUSER::"
+        },
+        {
+          "name": "PGPASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGPASSWORD::"
+        },
+        {
+          "name": "PGDATABASE",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGDATABASE::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/beniyiyim",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
     }
   ],
-  "placementConstraints": [],
-  "memory": "4096",
-  "taskRoleArn": null,
-  "compatibilities": [
-    "EC2",
-    "FARGATE"
-  ],
-  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:366354050833:task-definition/beniyiyim-TD:1",
   "family": "beniyiyim-TD",
-  "requiresAttributes": [
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "ecs.capability.execution-role-awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "ecs.capability.task-eni"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-    }
-  ],
-  "pidMode": null,
+  "executionRoleArn": "arn:aws:iam::366354050833:role/ecsServiceRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "networkMode": "awsvpc",
-  "runtimePlatform": null,
   "cpu": "2048",
-  "revision": 1,
-  "status": "ACTIVE",
-  "inferenceAccelerators": null,
-  "proxyConfiguration": null,
-  "volumes": []
+  "memory": "4096",
+  "tags": []
 }
