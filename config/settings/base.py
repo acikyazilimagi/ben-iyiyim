@@ -73,11 +73,12 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    "django_minify_html",
 ]
 
 LOCAL_APPS = [
     "ben_iyiyim.users",
-    # Your stuff: custom apps go here
+    "depremzedeler",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -134,6 +135,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_minify_html.middleware.MinifyHtmlMiddleware",
 ]
 
 # STATIC
