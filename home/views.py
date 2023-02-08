@@ -34,7 +34,7 @@ def textKontrol(input):
         return False
 
 def durumValidation(input):
-    if any(input is x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
+    if any(input == x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
         return True
     else:
         return False
