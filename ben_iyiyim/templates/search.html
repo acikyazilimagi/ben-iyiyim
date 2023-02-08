@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+  Depremzede Sorgu - Ben İyiyim
+{% endblock %}
+{% block content %}
+  {% csrf_token %}
+  <div class="search-list">
+    <div class="form-input">
+      <label>İsim Soyisim<small>(En az 3 karakter)</small></label>
+      <input
+        type="text"
+        id="searchInputName"
+        placeholder="İsim Soyisim arama"
+        min="3"
+      />
+    </div>
+    <div class="form-input">
+      <label>Telefon Numarası<small>(En az 10 karakter)</small></label>
+      <input type="tel" id="searchInputTel" placeholder="Örn: 05XXXXXXXXX" min="10"/>
+    </div>
+    <div class="form-input">
+      <button type="button" class="arama-butonu" onclick="searchThis()">
+        Ara
+      </button>
+    </div>
+  </div>
+  <div id="card__container"></div>
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block inline_js %}
+
+{% endblock %}
