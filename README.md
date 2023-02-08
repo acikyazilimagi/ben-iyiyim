@@ -1,27 +1,24 @@
-# Ben İyiyim
+[For English](README_ENG.md)
 
-[License: Apache Software License 2.0](https://github.com/acikkaynak/ben-iyiyim/blob/main/LICENSE)
+## Proje Hakkında (About Project)
 
-## Deployment
 
-The following details how to deploy this application.
+Ben İyiyim, deprem bölgelerinde bulunan insanların mevcut durumlarının güncellenebildiği ve görüntülenebildiği kullanımı basit bir platform olarak geliştirildi.
+Ayrıca hastanelerden gelen güncel hasta verilerinin veritabanına kolay aktarımını sağlayarak, veri girişi mobilitesi sağlamayı amaçlamaktadır.
 
-## Local Development
+Platformun birinci önceliği en minimum internet bağlantısının olduğu noktalarda bile stabil çalışması ve bilgi aktarabilmesidir. 
+Bu sebepten dolayı pure HTML, Javascript ve CSS ile hiçbir kütüphane importlanmadan Frontend 'i geliştirildi. Backend 'i ise Django ve Postgre ile hazırlandı.
 
-```commandline
-docker-compose -f local.yml build
-docker-compose -f local.yml up
-```
-* App Url: `http://localhost:8000`
-* Documentation Url: `http://localhost:4000`
+## İletişim Kanalları
 
-### Docker
+- [Discord Kanalı](https://discord.com/invite/itdepremyardim)
 
-See detailed [cookiecutter-django Docker documentation](http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html).
 
-### Sentry
 
-Sentry is an error logging aggregator service. You can sign up for a free account at <https://sentry.io/signup/?code=cookiecutter> or download and host it yourself.
-The system is set up with reasonable defaults, including 404 logging and integration with the WSGI application.
+## Kullanılan Teknoloji ve Sistemler
 
-You must set the DSN url in production.
+- [Django 4.1.6](https://github.com/django/django)
+- PostgreSQL
+- Pure HTML
+- Pure CSS
+- Pure JS
