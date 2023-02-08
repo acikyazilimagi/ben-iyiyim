@@ -39,3 +39,6 @@ class Depremzede(models.Model):
         max_length=100, choices=DURUM_CHOICES, blank=True, null=True
     )
     tarih = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        verbose_name_plural = "Depremzedeler"
