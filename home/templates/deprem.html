@@ -435,7 +435,14 @@
 
       function generateCard({ isim, sehir, adres, durum, created_at }) {
         const elem = document.createElement("div");
-
+        if(durum == "iyiyim") {
+          var durumText = "İyiyim";
+        } else if (durum == "yardim") {
+          var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
+        } else {
+          var durumText = "Enkaz Altındayım";
+        }  
+          
         elem.className = "card";
         elem.innerHTML = `
           <div class="card__status bold ${mapStatus(durum)} field-durum"></div>
@@ -453,6 +460,7 @@
         elem.querySelector(".field__isim").innerText = isim;
         elem.querySelector(".field__sehir").innerText = sehir;
         elem.querySelector(".field__adres").innerText = adres;
+        elem.querySelector(".field-durum").innerText = durumText;
         elem.querySelector(".field__date").innerText = formatDate(created_at);
         return elem;
       }
