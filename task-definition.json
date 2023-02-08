@@ -1,0 +1,68 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "container-name",
+      "image": "366354050833.dkr.ecr.eu-central-1.amazonaws.com/beniyiyim-ecr:245000c26d024b62e5cb52f32737f286c3b4d495",
+      "cpu": 2048,
+      "memory": 4096,
+      "portMappings": [
+        {
+          "name": "container-name-8000-tcp",
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "secrets": [
+        {
+          "name": "SECRET_KEY",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:SECRET_KEY::"
+        },
+        {
+          "name": "PGHOST",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGHOST::"
+        },
+        {
+          "name": "PGPORT",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGPORT::"
+        },
+        {
+          "name": "PGUSER",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGUSER::"
+        },
+        {
+          "name": "PGPASSWORD",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGPASSWORD::"
+        },
+        {
+          "name": "PGDATABASE",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGDATABASE::"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/beniyiyim",
+          "awslogs-region": "eu-central-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "beniyiyim-TD",
+  "executionRoleArn": "arn:aws:iam::366354050833:role/ecsServiceRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "2048",
+  "memory": "4096",
+  "tags": []
+}
