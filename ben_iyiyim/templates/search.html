@@ -4,26 +4,29 @@
 {% endblock %}
 {% block content %}
   {% csrf_token %}
-  <div class="search-list">
-    <div class="form-input">
-      <label>İsim Soyisim<small>(En az 3 karakter)</small></label>
+  <form class="form">
+    <div class="form__group">
+      <label for="searchInputName">İsim Soyisim<small>(En az 3 karakter)</small></label>
       <input
+        class="form__input"
         type="text"
         id="searchInputName"
         placeholder="İsim Soyisim arama"
         min="3"
       />
     </div>
-    <div class="form-input">
-      <label>Telefon Numarası<small>(En az 10 karakter)</small></label>
-      <input type="tel" id="searchInputTel" placeholder="Örn: 05XXXXXXXXX" min="10"/>
+    <div class="form__group">
+      <label for="searchInputTel">Telefon Numarası<small>(En az 10 karakter)</small></label>
+      <input
+        class="form__input"
+        type="tel"
+        id="searchInputTel"
+        placeholder="Örn: 05XXXXXXXXX"
+        min="10"
+      />
     </div>
-    <div class="form-input">
-      <button type="button" class="arama-butonu" onclick="searchThis()">
-        Ara
-      </button>
-    </div>
-  </div>
+    <button class="button" type="submit">Ara</button>
+  </form>
   <div id="card__container"></div>
 {% endblock %}
 {% block footer %}

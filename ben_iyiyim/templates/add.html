@@ -3,20 +3,20 @@
   Depremzede Ekle - Ben İyiyim
 {% endblock %}
 {% block content %}
-  <form action="report" method="post">
-
-    <div class="form-input">
-      <label for="input-isim">İsim</label
-      ><input
-      id="input-isim"
-      type="text"
-      placeholder="İsim yazınız."
-      name="isim"
-      required>
+  <form class="form" action="report" method="post">
+    <div class="form__group">
+      <label for="input-isim">İsim</label>
+      <input
+        class="form__input"
+        id="input-isim"
+        type="text"
+        placeholder="İsim yazınız."
+        name="isim"
+        required>
     </div>
-    <div class="form-input">
+    <div class="form__group">
       <label for="input-sehir">Sehir</label>
-      <select name="sehir" id="input-sehir" required>
+      <select class="form__input" name="sehir" id="input-sehir" required>
         <option value disabled hidden selected>Şehir Seçiniz</option>
         <option value="Adana">Adana</option>
         <option value="Batman">Batman</option>
@@ -38,18 +38,19 @@
         <option value="Van">Van</option>
       </select>
     </div>
-    <div class="form-input">
-      <label for="input-adres">Adres</label
-      ><input
-      id="input-adres"
-      type="text"
-      name="adres"
-      placeholder="Adres ekleyiniz."
-      required>
+    <div class="form__group">
+      <label for="input-adres">Adres</label>
+      <textarea
+        class="form__input"
+        id="input-adres"
+        type="text"
+        name="adres"
+        placeholder="Adres ekleyiniz."
+        required></textarea>
     </div>
-    <div class="form-input">
+    <div class="form__group">
       <label for="input-durum">Durum</label>
-      <select name="durum" id="input-durum" required>
+      <select class="form__input" name="durum" id="input-durum" required>
         <option value disabled hidden selected>Durum Seçiniz</option>
         <option value="iyiyim">İyiyim</option>
         <option value="enkaz-altinda-degilim-fakat-yardima-ihtiyacim-var">
@@ -58,16 +59,17 @@
         <option value="enkaz-altindayim">Enkaz altındayım.</option>
       </select>
     </div>
-    <div class="form-input">
-      <label for="input-tel">Telefon <small>(Opsiyonel)</small></label
-      ><input
-      id="input-tel"
-      type="tel"
-      name="tel"
-      placeholder="Telefon ekleyiniz (Örn: 05XXXXXXXXX)."
-    />
+    <div class="form__group">
+      <label for="input-tel">Telefon <small>(Opsiyonel)</small></label>
+      <input
+        class="form__input"
+        id="input-tel"
+        type="tel"
+        name="tel"
+        placeholder="Telefon ekleyiniz (Örn: 05XXXXXXXXX)."
+      />
     </div>
-    <div class="form-input"><input type="submit" value="Gönder"/></div>
+    <button class="button" type="submit">Gönder</button>
   </form>
 {% endblock %}
 {% block inline_js %}
