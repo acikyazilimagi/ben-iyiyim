@@ -502,16 +502,6 @@
             alert("İsim en az 3 karakter, telefon ise en az 2 karakter olmalıdır.");
           }  
       }
-
-      {% if messages %}
-        {% for message in messages %}
-          {% if message.tags == "success" %}
-          alert("{{ message }}");
-          {% elif message.tags == "error" %}
-          alert("{{ message }}");
-          {% endif %}
-        {% endfor %}
-      {% endif %}
     </script>
   </body>
 </html>
