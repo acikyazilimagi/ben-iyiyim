@@ -2,6 +2,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from django.core.serializers import serialize
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.decorators.cache import cache_page
 from html import escape
 import json
 import re
@@ -34,12 +35,13 @@ def textKontrol(input):
         return False
 
 def durumValidation(input):
-    if any(input is x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
+    if any(input == x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
         return True
     else:
         return False
 
 # Create your views here.
+@cache_page(60 * 15)
 def index(request):
     return render(request, 'deprem.html')
 
