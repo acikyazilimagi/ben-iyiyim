@@ -11,4 +11,5 @@ urlpatterns = [
     path('report', views.report, name="report"),
     path('search', views.search, name="search"),
     path('api/', include(router.urls)),
+    path("health", views.health_check, name="health")
 ]

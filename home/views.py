@@ -10,9 +10,12 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+import logging
+
 from .models import Person
 from .serializers import PersonSerializer
 
+logger = logging.getLogger(__name__)
 
 class PersonViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
@@ -95,3 +98,7 @@ def search(request):
             del d['model']
         rlist = json.dumps(robject)
         return HttpResponse(rlist, content_type="application/json")
+
+def health_check(request):
+    logger.debug(request.get_host())
+    return JsonResponse({"status": "ok"})

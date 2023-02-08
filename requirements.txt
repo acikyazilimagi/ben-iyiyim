@@ -14,4 +14,3 @@ pytz==2022.7.1
 sqlparse==0.4.2
 whitenoise==6.2.0
 zipp==3.12.1
-pymemcache==4.0.0
