@@ -135,8 +135,6 @@ form,
 input,
 select,
 textarea {
-  background: #ffffff;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
   display: block;
   font-size: 1rem;
   line-height: 1.5;
@@ -157,7 +155,7 @@ textarea {
 }
 
 input[type="submit"],
-.selector button,
+.selector a,
 .arama-butonu {
   background: #0a7b31;
   color: #fff;
@@ -211,19 +209,29 @@ form.open,
   display: none;
 }
 
-.selector button {
+.selector a {
   width: 100%;
   border: none;
   padding: 20px;
 }
 
-.selector button.depremzede {
-  background-color: #8e1b07;
+.selector a.depremzede {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  text-decoration: none;
+  text-align: center;
+  color: initial;
+  background-color: #cc0000;
 }
-
-.selector button.depremzede-yakini {
+.selector a.depremzede-yakini {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  text-decoration: none;
+  text-align: center;
+  color: initial;
   background-color: #c14d0a;
 }
+
 
 @media (max-width: 500px) {
   h3 {
