@@ -13,7 +13,6 @@ COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-
 COPY ./start-django.sh /start-django
 RUN chmod +x /start-django
 
