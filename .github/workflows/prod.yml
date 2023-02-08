@@ -51,6 +51,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ben-iyiyim
+        service: beniyiyim-service
         cluster: base-cluster
         wait-for-service-stability: true
