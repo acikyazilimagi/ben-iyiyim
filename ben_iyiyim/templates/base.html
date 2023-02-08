@@ -8,12 +8,10 @@
   <title>{% block title %}Ben İyiyim{% endblock title %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="IT Deprem Yardım">
-
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
   <link rel="stylesheet" href="{% static 'css/project.css' %}">
   <script defer src="{% static 'js/project.js' %}"></script>
 </head>
-
 <body>
 <header>
   {% block header %}
@@ -27,5 +25,9 @@
   {% block footer %}
   {% endblock %}
 </footer>
+<script>
+  {% block inline_js %}
+  {% endblock %}
+</script>
 </body>
 </html>
