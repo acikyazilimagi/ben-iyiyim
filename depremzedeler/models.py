@@ -1,6 +1,5 @@
-from datetime import timezone
-
 from django.db import models
+from django.utils import timezone
 
 
 class Depremzede(models.Model):
@@ -33,7 +32,7 @@ class Depremzede(models.Model):
     il = models.CharField(max_length=100, choices=IL_CHOICES)
     adres = models.CharField(max_length=200, blank=True, null=True)
     tarif = models.CharField(max_length=200, blank=True, null=True)
-    telefon = models.IntegerField(max_length=13)
+    telefon = models.CharField(max_length=13)
     cikarildi = models.BooleanField(default=False)
     durum = models.CharField(
         max_length=100, choices=DURUM_CHOICES, blank=True, null=True
