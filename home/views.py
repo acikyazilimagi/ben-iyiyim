@@ -11,9 +11,6 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework.permissions import IsAuthenticated
 
 import logging
-from rest_framework.request import Request
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from .models import Person
 from .serializers import PersonSerializer
@@ -102,7 +99,6 @@ def search(request):
         rlist = json.dumps(robject)
         return HttpResponse(rlist, content_type="application/json")
 
-class HealthCheckView(APIView):
-    def get(self, request: Request) -> Response:
-        logger.debug(request.get_host())
-        return Response(data={"status": "ok"})
+def health_check(request):
+    logger.debug(request.get_host())
+    return JsonResponse({"status": "ok"})
