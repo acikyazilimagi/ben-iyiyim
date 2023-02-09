@@ -491,15 +491,19 @@
             .then((response) => response.json())
             .then((data) => {
               listElement.innerHTML = ""
-              data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at } = key.fields;
-                listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at })
-                );
-              });
+              if (data.length === 0) {
+                alert("Sonuç bulunamadı.")
+              } else {
+                data.forEach(function (key, index) {
+                  var { isim, sehir, adres, durum, created_at } = key.fields;
+                  listElement.appendChild(
+                    generateCard({ isim, sehir, adres, durum, created_at })
+                  );
+                });
+              };
             });
           } else {
-            alert("İsim en az 3 karakter, telefon ise en az 2 karakter olmalıdır.");
+            alert("İsim en az 3 karakter, telefon ise en az 9 karakter olmalıdır.");
           }  
       }
     </script>
