@@ -374,134 +374,91 @@
     <div id="card__container"></div>
     <!----- E: ARAMA SAYFASI ---->
     <script>
-      var nameInput = document.getElementById("searchInputName");
-      var telInput = document.getElementById("searchInputTel");
-      var listElement = document.getElementById("card__container");
+      const formatIsoDate = (dateString) => {
+        const date = new Date(dateString);
 
-      function show(selector) {
-            if(selector =="form"){
-        document.querySelector("form").classList.toggle("open")
-        document.querySelector(".search-list").classList.remove("open")
-      }
-      else{
-        document.querySelector(".search-list").classList.toggle("open")
-        document.querySelector("form").classList.remove("open")
-      }
-   
-      }
-
-      function formatDate(dateString) {
-        var date = new Date(dateString);
-
-        if (date.toString() === "Invalid Date") {
-          return "";
+        if (date.toString() === 'Invalid Date') {
+          return '';
         }
 
-        date.setHours(date.getHours()); // gmt+3
+        return new Intl.DateTimeFormat('tr-TR', { dateStyle: 'full', timeStyle: 'medium', timeZone: 'Turkey' }).format(date);
+      };
 
-        var dateObj = {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate(),
-          hour: date.getHours(),
-          mins: date.getMinutes(),
-        };
+      const generateCard = ({ isim, sehir, adres, durum, created_at }) => {
+        const status =
+          {
+            iyiyim: 'success',
+            yardim: 'warning',
+            'enkaz-altinda': 'danger',
+          }[durum] || 'success';
 
-        return (
-          dateObj.hour +
-          ":" +
-          dateObj.mins +
-          " - " +
-          dateObj.day +
-          "/" +
-          dateObj.month +
-          "/" +
-          dateObj.year
-        );
-      }
+        const statusText =
+          {
+            iyiyim: 'İyiyim',
+            yardim: 'Enkaz altında değilim ancak yardıma ihtiyacım var.',
+          }[durum] || 'Enkaz Altındayım';
 
-      function mapStatus(status) {
-        switch (status) {
-          case "iyiyim":
-            return "success";
-          case "yardim":
-            return "warning";
-          case "enkaz-altinda":
-            return "danger";
-          default:
-            return "success";
+        const $elem = document.createElement('div');
+
+        $elem.className = 'card';
+        $elem.innerHTML = `
+            <div class="card__status bold ${status} field-durum"></div>
+            <div class="card__header">
+              <span class="bold field__isim"></span>
+              <span class="bold field__sehir"></span>
+            </div>
+            <div class="card__details">
+              <span class="bold">Adres:</span>
+              <var class="field__adres"></var>
+              <span class="date field__date"></span>
+            </div>
+          `;
+
+        $elem.querySelector('.field__isim').innerText = isim || '';
+        $elem.querySelector('.field__sehir').innerText = sehir || '';
+        $elem.querySelector('.field__adres').innerText = adres || '';
+        $elem.querySelector('.field-durum').innerText = statusText;
+        $elem.querySelector('.field__date').innerText = formatIsoDate(created_at);
+
+        return $elem;
+      };
+
+      const searchThis = () => {
+        const $nameInput = document.getElementById('searchInputName');
+        const $telInput = document.getElementById('searchInputTel');
+
+        if ($nameInput.value.length < 3) {
+          alert('İsim en az 3 karakter olmalı');
+          return;
         }
-      }
 
-      function generateCard({ isim, sehir, adres, durum, created_at }) {
-        const elem = document.createElement("div");
-        if(durum == "iyiyim") {
-          var durumText = "İyiyim";
-        } else if (durum == "yardim") {
-          var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
-        } else {
-          var durumText = "Enkaz Altındayım";
-        }  
-          
-        elem.className = "card";
-        elem.innerHTML = `
-          <div class="card__status bold ${mapStatus(durum)} field-durum"></div>
-          <div class="card__header">
-            <span class="bold field__isim"></span>
-            <span class="bold field__sehir"></span>
-          </div>
-          <div class="card__details">
-            <span class="bold">Adres:</span>
-            <var class="field__adres"></var>
-            <span class="date field__date"></span>
-          </div>
-        `;
-
-        elem.querySelector(".field__isim").innerText = isim;
-        elem.querySelector(".field__sehir").innerText = sehir;
-        elem.querySelector(".field__adres").innerText = adres;
-        elem.querySelector(".field-durum").innerText = durumText;
-        elem.querySelector(".field__date").innerText = formatDate(created_at);
-        return elem;
-      }
-
-      
-      
-      //// preventdefault ile pure js XMLHttpRequest() kullanılarak post edilebilir.
-      
-      function searchThis() {
-        var nameVal = "";
-        var telVal = "";
-        if (
-          nameInput.value.length > 2
-        ) {
-          nameVal += "isim=" + nameInput.value;
+        if ($telInput.value.length < 10) {
+          alert('Telefon en az 10 karakter olmalı');
+          return;
         }
-        if (telInput.value.length > 8) {
-          telVal += "tel=" + telInput.value;
-        }
-        if (telInput.value.length > 9 || nameInput.value.length > 2) {
-          let obj = fetch(
-            "/search?" +
-              nameVal +
-              "&" +
-              telVal,
-            { mode: "no-cors" }
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              listElement.innerHTML = ""
-              data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at } = key.fields;
-                listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at })
-                );
-              });
+
+        fetch(`/search?isim=${$nameInput.value}&tel=${$telInput.value}`, { mode: 'no-cors' })
+          .then((response) => response.json())
+          .then((data) => {
+            const $listElement = document.getElementById('card__container');
+
+            $listElement.innerHTML = '';
+
+            data.forEach((card) => {
+              $listElement.appendChild(generateCard(card.fields));
             });
-          } else {
-            alert("İsim en az 3 karakter, telefon ise en az 2 karakter olmalıdır.");
-          }  
-      }
+          });
+      };
+
+      const show = (selector) => {
+        const $form = document.querySelector('form');
+        const $searchList = document.querySelector('.search-list');
+
+        const isFormSelector = selector === 'form';
+
+        $form.classList[isFormSelector ? 'toggle' : 'remove']('open');
+        $searchList.classList[!isFormSelector ? 'toggle' : 'remove']('open');
+      };
     </script>
   </body>
 </html>
