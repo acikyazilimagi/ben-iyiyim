@@ -450,6 +450,12 @@
 
             $card.innerHTML = '';
 
+            if (data.length === 0) {
+              alert('Kayıtlı kişi bulunamadı.');
+
+              return;
+            }
+
             data.forEach((card) => {
               $card.appendChild(generateCard(card.fields));
             });
