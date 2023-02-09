@@ -23,7 +23,7 @@ services:
     volumes:
       - ./:/app
     ports:
-      - "8000:80"
+      - "80:80"
     environment:
       - PGPASSWORD=debug
       - PGUSER=debug
