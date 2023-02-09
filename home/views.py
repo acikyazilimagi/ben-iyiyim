@@ -100,5 +100,5 @@ def search(request):
         return HttpResponse(rlist, content_type="application/json")
 
 def health_check(request):
-    logger.debug(request.get_host())
+    logger.error(request.get_host())
     return JsonResponse({"status": "ok"})
