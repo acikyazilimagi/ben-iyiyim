@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 #DEBUG = os.getenv('DEBUG', 'False') == 'True'
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://*.beniyiyim.com", "http://*.beniyiyim.com"]
+ALLOWED_HOSTS = ["https://*.beniyiyim.com", "http://*.beniyiyim.com", os.environ["AWS_LB_HOST"]]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
