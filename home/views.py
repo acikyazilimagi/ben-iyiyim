@@ -74,7 +74,7 @@ def search(request):
             if len(isim) > 2 and telKontrol(tel):
                 reports = Person.objects.filter(isim__icontains=isim, tel__contains=tel)
             else:
-                return HttpResponseBadRequest("Input hatalı.")
+                return JsonResponse({'error': "Input hatalı."}, status=400)
         else:
             if 'isim' in request.GET:
                 isim = escape(request.GET.get('isim'))
@@ -82,15 +82,15 @@ def search(request):
                 if len(isim) > 2:
                     reports = Person.objects.filter(isim__icontains=isim).order_by('created_at')[:10]
                 else:
-                    return HttpResponseBadRequest('İsim 2 karakterden uzun olmalı.')
+                    return JsonResponse({'error': 'İsim 2 karakterden uzun olmalı.'}, status=400)
             elif 'tel' in request.GET:
                 tel = escape(request.GET.get('tel'))
                 if telKontrol(tel):
                     reports = Person.objects.filter(tel__contains=tel).order_by('created_at')[:10]
                 else:
-                    return HttpResponseBadRequest("Telefon numarası bilgileri hatalı.")
+                    return JsonResponse({'error': "Telefon numarası bilgileri hatalı."}, status=400)
             else:
-                return HttpResponse("Arama yapmak için veri girişi yapın.")
+                return JsonResponse({'error': "Arama yapmak için veri girişi yapın."}, status=400)
         rlist = serialize('json', reports, fields=["isim", "sehir", "adres", "durum", "created_at"], use_natural_primary_keys=True)
         robject = json.loads(rlist)
         for d in robject:

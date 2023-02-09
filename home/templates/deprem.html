@@ -493,6 +493,8 @@
               listElement.innerHTML = ""
               if (data.length === 0) {
                 alert("Sonuç bulunamadı.")
+              } else if (data.error) {
+                alert(data.error);
               } else {
                 data.forEach(function (key, index) {
                   var { isim, sehir, adres, durum, created_at } = key.fields;
@@ -501,7 +503,7 @@
                   );
                 });
               };
-            }).catch(err => {alert(err);});
+            });
           } else {
             alert("İsim en az 3 karakter, telefon ise en az 9 karakter olmalıdır.");
           }  
