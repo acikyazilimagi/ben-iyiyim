@@ -93,6 +93,8 @@ class Person(models.Model):
         ("iyiyim", "İyiyim"),
         ("yardim", "Enkaz altında değilim fakat yardıma ihtiyacım var"),
         ("enkaz-altinda", "Enkaz altındayım"),
+        ("olu", "Ölü"),
+        ("hastane-yatis", "Hastane Yatış"),
     )
 
     isim = models.CharField(max_length=100, unique=True)
