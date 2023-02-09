@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
 #DEBUG = os.getenv('DEBUG', 'False') == 'True'
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://*.beniyiyim.com", "http://*.beniyiyim.com", os.environ["AWS_LB_HOST"]]
+ALLOWED_HOSTS = ["www.beniyiyim.com", "beniyiyim.com", os.environ["AWS_LB_HOST"]]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
@@ -154,4 +154,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #IP Range for AWS Health Check
-ALLOWED_CIDR_NETS = ['10.0.0.0/16']
+ALLOWED_CIDR_NETS = ['10.0.0.0/24']
