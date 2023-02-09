@@ -381,7 +381,8 @@
           return '';
         }
 
-        return new Intl.DateTimeFormat('tr-TR', { dateStyle: 'full', timeStyle: 'medium', timeZone: 'Turkey' }).format(date);
+        return new Intl.DateTimeFormat('tr-TR', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Turkey' })
+          .format(date);
       };
 
       const generateCard = ({ isim, sehir, adres, durum, created_at }) => {
@@ -396,7 +397,8 @@
           {
             iyiyim: 'İyiyim',
             yardim: 'Enkaz altında değilim ancak yardıma ihtiyacım var.',
-          }[durum] || 'Enkaz Altındayım';
+            'enkaz-altinda': 'Enkaz Altındayım',
+          }[durum] || '';
 
         const $elem = document.createElement('div');
 
@@ -414,18 +416,22 @@
             </div>
           `;
 
-        $elem.querySelector('.field__isim').innerText = isim || '';
-        $elem.querySelector('.field__sehir').innerText = sehir || '';
-        $elem.querySelector('.field__adres').innerText = adres || '';
-        $elem.querySelector('.field-durum').innerText = statusText;
-        $elem.querySelector('.field__date').innerText = formatIsoDate(created_at);
+        [
+          { selector: '.field__isim', value: isim || '' },
+          { selector: '.field__sehir', value: sehir || '' },
+          { selector: '.field__adres', value: adres || '' },
+          { selector: '.field-durum', value: statusText },
+          { selector: '.field__date', value: formatIsoDate(created_at) },
+        ].forEach((map) => {
+          $elem.querySelector(map.selector).innerText = map.value;
+        });
 
         return $elem;
       };
 
       const searchThis = () => {
-        const $nameInput = document.getElementById('searchInputName');
-        const $telInput = document.getElementById('searchInputTel');
+        const $nameInput = document.querySelector('#searchInputName');
+        const $telInput = document.querySelector('#searchInputTel');
 
         if ($nameInput.value.length < 3) {
           alert('İsim en az 3 karakter olmalı');
@@ -440,24 +446,22 @@
         fetch(`/search?isim=${$nameInput.value}&tel=${$telInput.value}`, { mode: 'no-cors' })
           .then((response) => response.json())
           .then((data) => {
-            const $listElement = document.getElementById('card__container');
+            const $card = document.querySelector('#card__container');
 
-            $listElement.innerHTML = '';
+            $card.innerHTML = '';
 
             data.forEach((card) => {
-              $listElement.appendChild(generateCard(card.fields));
+              $card.appendChild(generateCard(card.fields));
             });
           });
       };
 
       const show = (selector) => {
-        const $form = document.querySelector('form');
-        const $searchList = document.querySelector('.search-list');
+        ['form', '.search-list'].forEach((selectorToRemove) => {
+          document.querySelector(selectorToRemove).classList.remove('open');
+        });
 
-        const isFormSelector = selector === 'form';
-
-        $form.classList[isFormSelector ? 'toggle' : 'remove']('open');
-        $searchList.classList[!isFormSelector ? 'toggle' : 'remove']('open');
+        document.querySelector(selector).classList.add('open');
       };
     </script>
   </body>
