@@ -21,7 +21,7 @@ class PersonViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Person.objects.all().order_by('created_at')
-    serializer_class = PersonSerializer
+    serializer_class = PersonSerializer(many=True)
 
 
 def telKontrol(input):
