@@ -391,34 +391,15 @@
       }
 
       function formatDate(dateString) {
-        var date = new Date(dateString);
+        const date = new Date(dateString);
 
-        if (date.toString() === "Invalid Date") {
-          return "";
+        if (date.toString() === 'Invalid Date') {
+          return '';
         }
 
-        date.setHours(date.getHours()); // gmt+3
-
-        var dateObj = {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate(),
-          hour: date.getHours(),
-          mins: date.getMinutes(),
-        };
-
-        return (
-          dateObj.hour +
-          ":" +
-          dateObj.mins +
-          " - " +
-          dateObj.day +
-          "/" +
-          dateObj.month +
-          "/" +
-          dateObj.year
-        );
-      }
+        return new Intl.DateTimeFormat('tr-TR', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Turkey' })
+          .format(date);
+      };
 
       function mapStatus(status) {
         switch (status) {
