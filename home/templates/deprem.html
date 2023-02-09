@@ -12,10 +12,10 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: sans-serif;
       }
 
       html {
-        font-family: sans-serif;
         font-size: 16px;
         line-height: 1.4;
         color: #747474;
@@ -118,14 +118,11 @@
         width: 100%;
       }
 
-      * {
-        font-family: sans-serif;
-      }
-
       form,
       .search-list {
         width: 90%;
         max-width: 500px;
+        display: none;
       }
 
       .form-input input,
@@ -178,26 +175,10 @@
         width: 100%;
       }
       
-      input[type="submit"]:hover {
-            background: #25ac53;
-        }
-
-        .arama-butonu:hover {
-            background: #25ac53;
-        }
-
-      input[type="submit"]:hover {
-        background: #25ac53;
-      }
-
+      input[type="submit"]:hover, 
       .arama-butonu:hover {
-        background: #25ac53;
-      }
-
-      form,
-      .search-list {
-        display: none;
-      }
+            background: #25ac53;
+        }
 
       form.open,
       .search-list.open {
@@ -244,7 +225,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-
         gap: 10px;
       }
 
@@ -252,9 +232,7 @@
         display: flex;
         flex-direction: column;
         padding: 10px;
-
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
         width: 200px;
       }
 
@@ -298,23 +276,23 @@
         <select name="sehir" id="input-sehir" required>
           <option value disabled hidden selected>Şehir Seçiniz</option>
           <option value="Adana">Adana</option>
-  <option value="Batman">Batman</option>
-  <option value="Bitlis">Bitlis</option>
-  <option value="Bingöl">Bingöl</option>
-  <option value="Diyarbakır">Diyarbakır</option>
-  <option value="Elazığ">Elazığ</option>
-  <option value="Gaziantep">Gaziantep</option>
-  <option value="Hakkari">Hakkari</option>
-  <option value="Hatay">Hatay</option>
-  <option value="Kahramanmaraş">Kahramanmaraş</option>
-  <option value="Kilis">Kilis</option>
-  <option value="Malatya">Malatya</option>
-  <option value="Mardin">Mardin</option>
-  <option value="Muş">Muş</option>
-  <option value="Osmaniye">Osmaniye</option>
-  <option value="Siirt">Siirt</option>
-  <option value="Şırnak">Şırnak</option>
-  <option value="Van">Van</option>
+          <option value="Batman">Batman</option>
+          <option value="Bitlis">Bitlis</option>
+          <option value="Bingöl">Bingöl</option>
+          <option value="Diyarbakır">Diyarbakır</option>
+          <option value="Elazığ">Elazığ</option>
+          <option value="Gaziantep">Gaziantep</option>
+          <option value="Hakkari">Hakkari</option>
+          <option value="Hatay">Hatay</option>
+          <option value="Kahramanmaraş">Kahramanmaraş</option>
+          <option value="Kilis">Kilis</option>
+          <option value="Malatya">Malatya</option>
+          <option value="Mardin">Mardin</option>
+          <option value="Muş">Muş</option>
+          <option value="Osmaniye">Osmaniye</option>
+          <option value="Siirt">Siirt</option>
+          <option value="Şırnak">Şırnak</option>
+          <option value="Van">Van</option>
         </select>
       </div>
       <div class="form-input">
