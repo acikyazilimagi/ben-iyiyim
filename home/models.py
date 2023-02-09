@@ -32,7 +32,7 @@ class Person(models.Model):
         ("enkaz-altinda", "Enkaz altındayım"),
     )
 
-    isim = models.CharField(max_length=100)
+    isim = models.CharField(max_length=100, unique=True)
     sehir = models.CharField(max_length=100, choices=IL_CHOICES)
     adres = models.CharField(max_length=256)
     tel = models.CharField(max_length=11, default="Yok")
