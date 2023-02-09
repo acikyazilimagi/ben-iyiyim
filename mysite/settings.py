@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ["https://*.beniyiyim.com", "http://*.beniyiyim.com"]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["https://ben-yiyim-django-production.up.railway.app", "https://beniyiyim.com"]
+CSRF_TRUSTED_ORIGINS = ["https://*.beniyiyim.com"]
 
 # Application definition
 
