@@ -40,6 +40,10 @@
         {
           "name": "PGDATABASE",
           "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:PGDATABASE::"
+        },
+        {
+          "name": "AWS_LB_HOST",
+          "valueFrom": "arn:aws:secretsmanager:eu-central-1:366354050833:secret:beniyiyim-prod-env-vxxh1F:AWS_LB_HOST::"
         }
       ],
       "logConfiguration": {
