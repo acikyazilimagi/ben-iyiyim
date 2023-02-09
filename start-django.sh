@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # migrations
-python manage.py createsuperuser --username argoadmin --email gokcekarda@gmail.com --noinput
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic --no-input
