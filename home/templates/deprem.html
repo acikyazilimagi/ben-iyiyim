@@ -379,8 +379,10 @@
         case "iyiyim":
           return "success";
         case "yardim":
+        case "hastane-yatis":
           return "warning";
         case "enkaz-altinda":
+        case "olu":
           return "danger";
         default:
           return "success";
@@ -393,8 +395,14 @@
         var durumText = "İyiyim";
       } else if (durum == "yardim") {
         var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
+      } else if (durum == "hastane-yatis") {
+        var durumText = "Hastanede yatıyorum.";
+      } else if (durum == "olu") {
+        var durumText = "Ölü";
+      } else if (durum == "enkaz-altinda"){
+        var durumText = "Enkaz altındayım.";
       } else {
-        var durumText = "Enkaz Altındayım";
+        var durumText = "Bilinmiyor."
       }
 
       elem.className = "card";
