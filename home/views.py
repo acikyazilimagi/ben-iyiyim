@@ -83,13 +83,13 @@ def search(request):
                 isim = escape(request.GET.get('isim'))
                 print(len(isim))
                 if len(isim) > 2:
-                    reports = Person.objects.filter(isim__icontains=isim).order_by('created_at')[:10]
+                    reports = Person.objects.filter(isim__icontains=isim).order_by('-created_at')[:20]
                 else:
                     return JsonResponse({'error': 'İsim 2 karakterden uzun olmalı.'}, status=400)
             elif 'tel' in request.GET:
                 tel = escape(request.GET.get('tel'))
                 if telKontrol(tel):
-                    reports = Person.objects.filter(tel__contains=tel).order_by('created_at')[:10]
+                    reports = Person.objects.filter(tel__contains=tel).order_by('-created_at')[:20]
                 else:
                     return JsonResponse({'error': "Telefon numarası bilgileri hatalı."}, status=400)
             else:
