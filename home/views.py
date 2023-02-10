@@ -59,9 +59,12 @@ def report(request):
             else:
                 tel = "Yok"
         if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and durumValidation(durum):
-            p = Person(isim=isim, sehir=sehir, adres=adres, tel=tel, durum=durum)
-            p.save()
-            return HttpResponse("Kaydedildi.")
+            if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
+                p = Person(isim=isim, sehir=sehir, adres=adres, tel=tel, durum=durum)
+                p.save()
+                return HttpResponse("Kaydedildi.")
+            else:
+                return HttpResponseBadRequest("Aynı veriler zaten kayıt edilmiş.")
         else:
             return HttpResponseBadRequest("Giriş yapılan bilgilerde desteklenmeyen karakterler var.")
     return redirect('index')
