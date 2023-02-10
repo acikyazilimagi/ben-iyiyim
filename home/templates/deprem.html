@@ -391,19 +391,25 @@
 
     function generateCard({ isim, sehir, adres, durum, created_at }) {
       const elem = document.createElement("div");
-      if (durum == "iyiyim") {
-        var durumText = "İyiyim";
-      } else if (durum == "yardim") {
-        var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
-      } else if (durum == "hastane-yatis") {
-        var durumText = "Hastanede yatıyorum.";
-      } else if (durum == "olu") {
-        var durumText = "Ölü";
-      } else if (durum == "enkaz-altinda"){
-        var durumText = "Enkaz altındayım.";
-      } else {
-        var durumText = "Bilinmiyor."
-      }
+      switch (durum) {
+        case "iyiyim":
+          var durumText = "İyiyim.";
+          break;
+        case "yardim":
+          var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
+          break;
+        case "hastane-yatis":
+          var durumText = "Hastanede yatıyorum.";
+          break;
+        case "olu":
+          var durumText = "Hayatını kaybetti."
+          break;
+        case "enkaz-altinda":
+          var durumText = "Enkaz altındayım.";
+          break;
+        default:
+          var durumText = "Bilinmiyor."          
+      } 
 
       elem.className = "card";
       elem.innerHTML = `
