@@ -469,6 +469,9 @@
 
         document.querySelector(selector).classList.add('open');
       };
+
+      const statusChanged = (event) => document.querySelector('.info-element')
+        .classList[event.target.value === 'iyiyim' ? 'remove' : 'add']('showing');
     </script>
   </body>
 </html>
