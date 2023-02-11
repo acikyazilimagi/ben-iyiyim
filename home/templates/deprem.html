@@ -387,7 +387,7 @@
       }
     }
 
-    function generateCard({ isim, sehir, adres, durum, created_at, not }) {
+    function generateCard({ isim, sehir, adres, durum, created_at, notlar }) {
       const elem = document.createElement("div");
       switch (durum) {
         case "iyiyim":
@@ -421,7 +421,7 @@
             <var class="field__adres"></var>
             <span class="date field__date"></span>
             <span class="bold">Not:</span>
-            <var class=".field__not"></var>
+            <var class=".field__notlar"></var>
           </div>
         `;
 
@@ -430,7 +430,7 @@
       elem.querySelector(".field__adres").innerText = adres;
       elem.querySelector(".field-durum").innerText = durumText;
       elem.querySelector(".field__date").innerText = formatDate(created_at);
-      elem.querySelector(".field__not").innerText = not;
+      elem.querySelector(".field__notlar").innerText = notlar;
       return elem;
     }
 
@@ -466,9 +466,9 @@
               alert(data.error);
             } else {
               data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at, not } = key.fields;
+                var { isim, sehir, adres, durum, created_at, notlar } = key.fields;
                 listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at, not })
+                  generateCard({ isim, sehir, adres, durum, created_at, notlar })
                 );
               });
             };
