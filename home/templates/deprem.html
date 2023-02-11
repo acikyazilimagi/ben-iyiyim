@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8" />
@@ -127,8 +127,7 @@
     }
 
     .form-input input,
-    .form-input select,
-    .form-input textarea {
+    .form-input select {
       padding: 10px;
       width: 100%;
       box-sizing: border-box;
@@ -139,8 +138,7 @@
     }
 
     input,
-    select,
-    textarea {
+    select {
       background: #ffffff;
       border-top: 1px solid rgba(0, 0, 0, 0.05);
       display: block;
@@ -156,10 +154,6 @@
         rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
         rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
         rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
-    }
-
-    textarea {
-      height: 70px;
     }
 
     input[type="submit"],
@@ -324,6 +318,10 @@
       <label for="input-tel">Telefon <small>(Opsiyonel)</small></label><input id="input-tel" type="tel" name="tel"
         placeholder="Telefon ekleyiniz (Örn: 05XXXXXXXXX)." />
     </div>
+    <div class="form-input">
+      <label for="input-not">Not <small>(Opsiyonel)</small></label><input id="input-not" type="text" name="not"
+        placeholder="Not ekleyiniz.">
+    </div>
     <div class="form-input"><input type="submit" value="Gönder" /></div>
   </form>
   <!----- E: KAYIT SAYFASI ---->
@@ -389,21 +387,27 @@
       }
     }
 
-    function generateCard({ isim, sehir, adres, durum, created_at }) {
+    function generateCard({ isim, sehir, adres, durum, created_at, notlar }) {
       const elem = document.createElement("div");
-      if (durum == "iyiyim") {
-        var durumText = "İyiyim";
-      } else if (durum == "yardim") {
-        var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
-      } else if (durum == "hastane-yatis") {
-        var durumText = "Hastanede yatıyorum.";
-      } else if (durum == "olu") {
-        var durumText = "Ölü";
-      } else if (durum == "enkaz-altinda"){
-        var durumText = "Enkaz altındayım.";
-      } else {
-        var durumText = "Bilinmiyor."
-      }
+      switch (durum) {
+        case "iyiyim":
+          var durumText = "İyiyim.";
+          break;
+        case "yardim":
+          var durumText = "Enkaz altında değilim ancak yardıma ihtiyacım var.";
+          break;
+        case "hastane-yatis":
+          var durumText = "Hastanede yatıyorum.";
+          break;
+        case "olu":
+          var durumText = "Hayatını kaybetti."
+          break;
+        case "enkaz-altinda":
+          var durumText = "Enkaz altındayım.";
+          break;
+        default:
+          var durumText = "Bilinmiyor."          
+      } 
 
       elem.className = "card";
       elem.innerHTML = `
@@ -416,6 +420,8 @@
             <span class="bold">Adres:</span>
             <var class="field__adres"></var>
             <span class="date field__date"></span>
+            <span class="bold">Not:</span>
+            <var class=".field__notlar"></var>
           </div>
         `;
 
@@ -424,6 +430,7 @@
       elem.querySelector(".field__adres").innerText = adres;
       elem.querySelector(".field-durum").innerText = durumText;
       elem.querySelector(".field__date").innerText = formatDate(created_at);
+      elem.querySelector(".field__notlar").innerText = notlar;
       return elem;
     }
 
@@ -459,9 +466,9 @@
               alert(data.error);
             } else {
               data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at } = key.fields;
+                var { isim, sehir, adres, durum, created_at, notlar } = key.fields;
                 listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at })
+                  generateCard({ isim, sehir, adres, durum, created_at, notlar })
                 );
               });
             };
