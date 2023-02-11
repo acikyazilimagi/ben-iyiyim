@@ -24,6 +24,15 @@ class PersonViewSet(viewsets.ModelViewSet):
     serializer_class = PersonSerializer
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
 def telKontrol(input):
     if re.match("^[0-9]+$", input) and len(input) > 9:
         return True
@@ -42,7 +51,7 @@ def durumValidation(input):
     else:
         return False
 
-# Create your views here.
+
 def index(request):
     return render(request, 'deprem.html')
 
@@ -51,8 +60,9 @@ def report(request):
         isim = escape(request.POST["isim"])
         sehir = escape(request.POST["sehir"])
         adres = escape(request.POST["adres"])
-        # TODO: get "notlar" field from the form
+        notlar = escape(request.POST["notlar"])
         durum = escape(request.POST["durum"])
+        address = get_client_ip(request)
         if "tel" in request.POST:
             tel = request.POST["tel"]
             if telKontrol(tel):
@@ -61,7 +71,7 @@ def report(request):
                 tel = "Yok"
         if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and durumValidation(durum):
             if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
-                p = Person(isim=isim, sehir=sehir, adres=adres, tel=tel, durum=durum)
+                p = Person(isim=isim, sehir=sehir, adres=adres, notlar=notlar, tel=tel, durum=durum, address=address)
                 p.save()
                 return HttpResponse("Kaydedildi.")
             else:
@@ -95,13 +105,15 @@ def search(request):
                     return JsonResponse({'error': "Telefon numarası bilgileri hatalı."}, status=400)
             else:
                 return JsonResponse({'error': "Arama yapmak için veri girişi yapın."}, status=400)
-        rlist = serialize('json', reports, fields=["isim", "sehir", "adres", "durum", "created_at"], use_natural_primary_keys=True)
+        rlist = serialize('json', reports, fields=["isim", "sehir", "adres", "durum", "notlar", "created_at"],
+                          use_natural_primary_keys=True)
         robject = json.loads(rlist)
         for d in robject:
             del d['pk']
             del d['model']
         rlist = json.dumps(robject)
         return HttpResponse(rlist, content_type="application/json")
+
 
 def health_check(request):
     logger.error(request.get_host())
