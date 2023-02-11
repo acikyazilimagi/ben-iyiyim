@@ -60,7 +60,7 @@ def report(request):
         isim = escape(request.POST["isim"])
         sehir = escape(request.POST["sehir"])
         adres = escape(request.POST["adres"])
-        notlar = escape(request.POST["not"])
+        notlar = escape(request.POST["notlar"])
         durum = escape(request.POST["durum"])
         address = get_client_ip(request)
         if "tel" in request.POST:
@@ -69,7 +69,7 @@ def report(request):
                 tel = tel
             else:
                 tel = "Yok"
-        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and durumValidation(durum):
+        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and textKontrol(notlar) and durumValidation(durum):
             if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
                 p = Person(isim=isim, sehir=sehir, adres=adres, notlar=notlar, tel=tel, durum=durum, address=address)
                 p.save()
