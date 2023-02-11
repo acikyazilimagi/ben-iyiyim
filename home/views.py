@@ -60,7 +60,7 @@ def report(request):
         isim = escape(request.POST["isim"])
         sehir = escape(request.POST["sehir"])
         adres = escape(request.POST["adres"])
-        notlar = escape(request.POST["notlar"])
+        notlar = escape(request.POST["not"])
         durum = escape(request.POST["durum"])
         address = get_client_ip(request)
         if "tel" in request.POST:
