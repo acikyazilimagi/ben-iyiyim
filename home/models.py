@@ -3,7 +3,6 @@ from django.utils import timezone
 # Create your models here.
 
 
-
 class Person(models.Model):
     IL_CHOICES = (
         ('Adana', 'Adana'),
@@ -100,6 +99,7 @@ class Person(models.Model):
     isim = models.CharField(max_length=100, unique=True)
     sehir = models.CharField(max_length=100, choices=IL_CHOICES)
     adres = models.CharField(max_length=256)
+    notlar = models.CharField(max_length=256, default="Yok")
     tel = models.CharField(max_length=11, default="Yok")
     durum = models.CharField(max_length=100, choices=DURUM_CHOICES)
     created_at = models.DateTimeField(default=timezone.now)

@@ -51,6 +51,7 @@ def report(request):
         isim = escape(request.POST["isim"])
         sehir = escape(request.POST["sehir"])
         adres = escape(request.POST["adres"])
+        # TODO: get "notlar" field from the form
         durum = escape(request.POST["durum"])
         if "tel" in request.POST:
             tel = request.POST["tel"]
