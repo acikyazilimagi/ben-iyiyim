@@ -127,8 +127,7 @@
     }
 
     .form-input input,
-    .form-input select,
-    .form-input textarea {
+    .form-input select {
       padding: 10px;
       width: 100%;
       box-sizing: border-box;
@@ -139,8 +138,7 @@
     }
 
     input,
-    select,
-    textarea {
+    select {
       background: #ffffff;
       border-top: 1px solid rgba(0, 0, 0, 0.05);
       display: block;
@@ -156,10 +154,6 @@
         rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
         rgb(60 66 87 / 16%) 0px 0px 0px 1px, rgb(0 0 0 / 0%) 0px 0px 0px 0px,
         rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 0px 0px;
-    }
-
-    textarea {
-      height: 70px;
     }
 
     input[type="submit"],
@@ -324,6 +318,10 @@
       <label for="input-tel">Telefon <small>(Opsiyonel)</small></label><input id="input-tel" type="tel" name="tel"
         placeholder="Telefon ekleyiniz (Örn: 05XXXXXXXXX)." />
     </div>
+    <div class="form-input">
+      <label for="input-not">Not <small>(Opsiyonel)</small></label><input id="input-not" type="text" name="not"
+        placeholder="Not ekleyiniz.">
+    </div>
     <div class="form-input"><input type="submit" value="Gönder" /></div>
   </form>
   <!----- E: KAYIT SAYFASI ---->
@@ -389,7 +387,7 @@
       }
     }
 
-    function generateCard({ isim, sehir, adres, durum, created_at }) {
+    function generateCard({ isim, sehir, adres, durum, created_at, not }) {
       const elem = document.createElement("div");
       switch (durum) {
         case "iyiyim":
@@ -422,6 +420,8 @@
             <span class="bold">Adres:</span>
             <var class="field__adres"></var>
             <span class="date field__date"></span>
+            <span class="bold">Not:</span>
+            <var class=".field__not"></var>
           </div>
         `;
 
@@ -430,6 +430,7 @@
       elem.querySelector(".field__adres").innerText = adres;
       elem.querySelector(".field-durum").innerText = durumText;
       elem.querySelector(".field__date").innerText = formatDate(created_at);
+      elem.querySelector(".field__not").innerText = not;
       return elem;
     }
 
@@ -465,9 +466,9 @@
               alert(data.error);
             } else {
               data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at } = key.fields;
+                var { isim, sehir, adres, durum, created_at, not } = key.fields;
                 listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at })
+                  generateCard({ isim, sehir, adres, durum, created_at, not })
                 );
               });
             };
