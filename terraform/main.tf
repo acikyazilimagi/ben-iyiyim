@@ -121,7 +121,7 @@ resource "aws_lb_target_group" "this" {
   }
 
   tags = {
-    Name        = "${local.app}-tg"
+    Name = "${local.app}-tg"
   }
 }
 
