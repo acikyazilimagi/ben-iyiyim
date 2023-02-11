@@ -103,4 +103,4 @@ class Person(models.Model):
     tel = models.CharField(max_length=11, default="Yok")
     durum = models.CharField(max_length=100, choices=DURUM_CHOICES)
     created_at = models.DateTimeField(default=timezone.now)
-    address = models.IPAddressField(blank=True, null=True)
+    address = models.GenericIPAddressField(blank=True, null=True, default="0.0.0.0")
