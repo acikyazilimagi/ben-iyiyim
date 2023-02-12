@@ -45,8 +45,14 @@ def textKontrol(input):
     else:
         return False
 
+def sehirValidation(input):
+    if any(input == x for x in Person.IL_CHOICES):
+        return True
+    else:
+        return False
+
 def durumValidation(input):
-    if any(input == x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
+    if any(input == x for x in Person.DURUM_CHOICES):
         return True
     else:
         return False
@@ -71,8 +77,8 @@ def report(request):
         if "notlar" in request.POST:
             notlar = escape(request.POST["notlar"])
         else:
-            notlar = "Yok"
-        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and textKontrol(notlar) and durumValidation(durum):
+            notlar = ""
+        if textKontrol(isim) and sehirValidation(sehir) and textKontrol(adres) and durumValidation(durum):
             if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
                 p = Person(isim=isim, sehir=sehir, adres=adres, notlar=notlar, tel=tel, durum=durum, address=address)
                 p.save()
