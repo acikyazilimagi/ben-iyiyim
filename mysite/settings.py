@@ -88,7 +88,7 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'anon': '500/day',
         'user': '2000/day'
-    }
+    },
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
 }
@@ -176,12 +176,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #IP Range for AWS Health Check
 ALLOWED_CIDR_NETS = ['10.0.0.0/24']
 
-if not DEBUG
+if not DEBUG:
   import sentry_sdk
   from sentry_sdk.integrations.django import DjangoIntegration
   
   sentry_sdk.init(
-      dsn=os.getenv['SENTRY_DSN'],
+      dsn=os.environ['SENTRY_DSN'],
       integrations=[DjangoIntegration()],
   
       # Set traces_sample_rate to 1.0 to capture 100%
