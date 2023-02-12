@@ -40,7 +40,7 @@ class Person(models.Model):
         ('Gaziantep', 'Gaziantep'),
         ('Giresun', 'Giresun'),
         ('Gümüşhane', 'Gümüşhane'),
-        ('Hakkâri', 'Hakkâri'),
+        ('Hakkari', 'Hakkari'),
         ('Hatay', 'Hatay'),
         ('Iğdır', 'Iğdır'),
         ('Isparta', 'Isparta'),
@@ -96,11 +96,11 @@ class Person(models.Model):
         ("hastane-yatis", "Hastane Yatış"),
     )
 
-    isim = models.CharField(max_length=100, unique=True)
+    isim = models.CharField(max_length=100)
     sehir = models.CharField(max_length=100, choices=IL_CHOICES)
     adres = models.CharField(max_length=256)
-    notlar = models.CharField(max_length=256, default="Yok", blank=True, null=True)
     tel = models.CharField(max_length=11, default="Yok")
     durum = models.CharField(max_length=100, choices=DURUM_CHOICES)
+    notlar = models.CharField(max_length=200, default="Yok", blank=True)
+    address = models.GenericIPAddressField(default="0.0.0.0")
     created_at = models.DateTimeField(default=timezone.now)
-    address = models.GenericIPAddressField(blank=True, null=True, default="0.0.0.0")

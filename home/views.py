@@ -45,8 +45,14 @@ def textKontrol(input):
     else:
         return False
 
+def sehirValidation(input):
+    if any(input == x[0] for x in Person.IL_CHOICES):
+        return True
+    else:
+        return False
+
 def durumValidation(input):
-    if any(input == x for x in ["iyiyim", "yardim", "enkaz-altinda"]):
+    if any(input == x[0] for x in Person.DURUM_CHOICES):
         return True
     else:
         return False
@@ -60,7 +66,6 @@ def report(request):
         isim = escape(request.POST["isim"])
         sehir = escape(request.POST["sehir"])
         adres = escape(request.POST["adres"])
-        notlar = escape(request.POST["notlar"])
         durum = escape(request.POST["durum"])
         address = get_client_ip(request)
         if "tel" in request.POST:
@@ -69,7 +74,11 @@ def report(request):
                 tel = tel
             else:
                 tel = "Yok"
-        if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and textKontrol(notlar) and durumValidation(durum):
+        if "notlar" in request.POST:
+            notlar = escape(request.POST["notlar"])
+        else:
+            notlar = ""
+        if textKontrol(isim) and sehirValidation(sehir) and textKontrol(adres) and durumValidation(durum):
             if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
                 p = Person(isim=isim, sehir=sehir, adres=adres, notlar=notlar, tel=tel, durum=durum, address=address)
                 p.save()
@@ -105,8 +114,7 @@ def search(request):
                     return JsonResponse({'error': "Telefon numarası bilgileri hatalı."}, status=400)
             else:
                 return JsonResponse({'error': "Arama yapmak için veri girişi yapın."}, status=400)
-        rlist = serialize('json', reports, fields=["isim", "sehir", "adres", "durum", "notlar", "created_at"],
-                          use_natural_primary_keys=True)
+        rlist = serialize('json', reports, fields=["isim", "sehir", "adres", "durum", "notlar", "created_at"], use_natural_primary_keys=True)
         robject = json.loads(rlist)
         for d in robject:
             del d['pk']
