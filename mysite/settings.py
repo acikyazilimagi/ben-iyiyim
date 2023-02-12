@@ -85,6 +85,8 @@ REST_FRAMEWORK = {
         'anon': '500/day',
         'user': '2000/day'
     }
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
