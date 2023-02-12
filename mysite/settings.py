@@ -34,6 +34,10 @@ ALLOWED_HOSTS = ["www.beniyiyim.com", "beniyiyim.com", os.environ["AWS_LB_HOST"]
 # Comment out the following line and place your railway URL, and your production URL in the array.
 CSRF_TRUSTED_ORIGINS = ["https://*.beniyiyim.com"]
 
+if DEBUG == True:
+    ALLOWED_HOSTS.append("localhost")
+    CSRF_TRUSTED_ORIGINS.append("http://localhost")
+
 # Application definition
 
 INSTALLED_APPS = [

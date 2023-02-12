@@ -119,7 +119,7 @@ def search(request):
         for d in robject:
             del d['pk']
             del d['model']
-        rlist = json.dumps(robject)
+        rlist = json.dumps(robject, ensure_ascii=False)
         return HttpResponse(rlist, content_type="application/json")
 
 
