@@ -387,7 +387,7 @@
       }
     }
 
-    function generateCard({ isim, sehir, adres, durum, created_at, notlar }) {
+    function generateCard({ isim, sehir, adres, durum, notlar, created_at }) {
       const elem = document.createElement("div");
       switch (durum) {
         case "iyiyim":
@@ -418,10 +418,10 @@
           </div>
           <div class="card__details">
             <span class="bold">Adres:</span>
-            <var class="field__adres"></var>
+            <span class="field__adres"></span>
             <span class="date field__date"></span>
             <span class="bold">Not:</span>
-            <var class=".field__notlar"></var>
+            <span class="field__notlar"></span>
           </div>
         `;
 
@@ -466,9 +466,9 @@
               alert(data.error);
             } else {
               data.forEach(function (key, index) {
-                var { isim, sehir, adres, durum, created_at, notlar } = key.fields;
+                var { isim, sehir, adres, durum, notlar, created_at } = key.fields;
                 listElement.appendChild(
-                  generateCard({ isim, sehir, adres, durum, created_at, notlar })
+                  generateCard({ isim, sehir, adres, durum, notlar, created_at })
                 );
               });
             };

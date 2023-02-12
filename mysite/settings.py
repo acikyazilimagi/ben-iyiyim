@@ -36,7 +36,7 @@ CSRF_TRUSTED_ORIGINS = ["https://*.beniyiyim.com"]
 
 if DEBUG == True:
     ALLOWED_HOSTS.append("localhost")
-    CSRF_TRUSTED_ORIGINS.append("localhost")
+    CSRF_TRUSTED_ORIGINS.append("http://localhost")
 
 # Application definition
 
