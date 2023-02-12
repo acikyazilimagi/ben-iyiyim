@@ -71,7 +71,7 @@ def report(request):
         if "notlar" in request.POST:
             notlar = escape(request.POST["notlar"])
         else:
-            notlar = ""
+            notlar = "Yok"
         if textKontrol(isim) and textKontrol(sehir) and textKontrol(adres) and textKontrol(notlar) and durumValidation(durum):
             if not(Person.objects.filter(isim=isim, sehir=sehir, adres=adres, durum=durum)):
                 p = Person(isim=isim, sehir=sehir, adres=adres, notlar=notlar, tel=tel, durum=durum, address=address)
