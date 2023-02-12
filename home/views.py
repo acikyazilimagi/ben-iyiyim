@@ -46,13 +46,13 @@ def textKontrol(input):
         return False
 
 def sehirValidation(input):
-    if any(input == x for x in Person.IL_CHOICES):
+    if any(input == x[0] for x in Person.IL_CHOICES):
         return True
     else:
         return False
 
 def durumValidation(input):
-    if any(input == x for x in Person.DURUM_CHOICES):
+    if any(input == x[0] for x in Person.DURUM_CHOICES):
         return True
     else:
         return False
