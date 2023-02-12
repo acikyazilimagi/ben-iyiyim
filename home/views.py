@@ -101,7 +101,6 @@ def search(request):
         else:
             if 'isim' in request.GET:
                 isim = escape(request.GET.get('isim'))
-                print(len(isim))
                 if len(isim) > 2:
                     reports = Person.objects.filter(isim__icontains=isim).order_by('-created_at')[:20]
                 else:
