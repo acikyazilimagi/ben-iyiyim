@@ -74,8 +74,8 @@ def report(request):
                 tel = tel
             else:
                 tel = "Yok"
-        if "notlar" in request.POST:
-            notlar = escape(request.POST["notlar"])
+        if "not" in request.POST:
+            notlar = escape(request.POST["not"])
         else:
             notlar = ""
         if textKontrol(isim) and sehirValidation(sehir) and textKontrol(adres) and durumValidation(durum):
