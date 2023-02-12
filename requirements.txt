@@ -15,3 +15,4 @@ sqlparse==0.4.2
 whitenoise==6.2.0
 zipp==3.12.1
 django-allow-cidr==0.6.0
+sentry-sdk==1.15.0
