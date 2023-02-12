@@ -328,23 +328,26 @@
 
   <!----- ARAMA SAYFASI ---->
   <div class="search-list hidden">
-    <div class="form-input">
-      <label>İsim Soyisim<small>(En az 3 karakter)</small></label>
-      <input type="text" id="searchInputName" placeholder="İsim Soyisim arama" min="3" />
-    </div>
-    <div class="form-input">
-      <label>Telefon Numarası<small>(En az 10 karakter)</small></label>
-      <input type="tel" id="searchInputTel" placeholder="Örn: 05XXXXXXXXX" min="10" />
-    </div>
-    <div class="form-input">
-      <button type="button" class="arama-butonu" onclick="searchThis()">
-        Ara
-      </button>
-    </div>
+    <form id="searchForm">
+      <div class="form-input">
+        <label>İsim Soyisim<small>(En az 3 karakter)</small></label>
+        <input type="text" id="searchInputName" placeholder="İsim Soyisim arama" min="3" />
+      </div>
+      <div class="form-input">
+        <label>Telefon Numarası<small>(En az 10 karakter)</small></label>
+        <input type="tel" id="searchInputTel" placeholder="Örn: 05XXXXXXXXX" min="10" />
+      </div>
+      <div class="form-input">
+        <button type="submit" class="arama-butonu" onclick="searchThis()">
+          Ara
+        </button>
+      </div>
+    </form>
   </div>
   <div id="card__container"></div>
   <!----- E: ARAMA SAYFASI ---->
   <script>
+    
     var nameInput = document.getElementById("searchInputName");
     var telInput = document.getElementById("searchInputTel");
     var listElement = document.getElementById("card__container");
@@ -489,6 +492,7 @@
 
       infoElement.classList.remove("showing");
     }
+    document.getElementById("searchForm").addEventListener('submit',function(e){ e.preventDefault(); });
   </script>
 </body>
 
