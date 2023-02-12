@@ -40,7 +40,7 @@ class Person(models.Model):
         ('Gaziantep', 'Gaziantep'),
         ('Giresun', 'Giresun'),
         ('Gümüşhane', 'Gümüşhane'),
-        ('Hakkâri', 'Hakkâri'),
+        ('Hakkari', 'Hakkari'),
         ('Hatay', 'Hatay'),
         ('Iğdır', 'Iğdır'),
         ('Isparta', 'Isparta'),
