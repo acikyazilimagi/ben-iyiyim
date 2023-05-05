@@ -245,3 +245,6 @@ fabric.properties
 .idea/vcs.xml
 Pipfile
 Pipfile.lock
+
+
+.terraform*
